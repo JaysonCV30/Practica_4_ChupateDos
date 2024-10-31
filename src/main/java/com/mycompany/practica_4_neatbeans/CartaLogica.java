@@ -8,7 +8,7 @@ public class CartaLogica {
 
     //Atributos privados de la clase para poder crear la carta
     private String suit; // Palos: "Oros", "Copas", "Espadas", "Bastos"
-    private String value; // Valores: "As", "2", "3", ..., "10", "Sota", 
+    private String value; // Valores: "1", "2", "3", ..., "10", "Sota", 
     // "Caballo", "Rey"
 
     //Constructor de la carta

@@ -1,6 +1,5 @@
 package com.mycompany.practica_4_neatbeans;
 
-import VistaGrafica.Juego_ChupateDos;
 import java.util.Scanner;
 
 public class Juego {

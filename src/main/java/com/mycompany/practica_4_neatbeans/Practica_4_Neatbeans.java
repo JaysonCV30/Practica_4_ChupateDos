@@ -1,7 +1,5 @@
 package com.mycompany.practica_4_neatbeans;
 
-import VistaGrafica.Juego_ChupateDos;
-
 public class Practica_4_Neatbeans {
     
     public static void main(String[] args) {

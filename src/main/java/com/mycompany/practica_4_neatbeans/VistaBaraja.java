@@ -11,16 +11,13 @@ package com.mycompany.practica_4_neatbeans;
 public class VistaBaraja extends javax.swing.JFrame {
 
     private Baraja mazo;
+    private VistaCarta carta;
     
     public VistaBaraja() {
         mazo = new Baraja();
-        //mazo.mezclar();
+        mazo.mezclar();
         initComponents();
-        //agregarCartas();
-        for (int i = 0; i < mazo.getSize(); i++) {
-            System.out.println(mazo.getBaraja());
-            //System.out.println(mazo.getCarta().getValue());
-        }
+        agregarCartas();
     }
     
     public Baraja getMazo() {

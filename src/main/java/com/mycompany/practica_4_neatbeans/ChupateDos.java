@@ -3,16 +3,9 @@ package com.mycompany.practica_4_neatbeans;
 import java.util.*;
 
 /**
- *
- * @authors Andres Le Gresley - Paul Chavez
- *
  * Esta es la clase principal, en la cual se comienza el juego y se determina la
  * cantidad de jugadores, los puntos y se involucran todas las clases creadas
  * anteriormente
- *
- * Version (1.0)
- *
- *
  */
 public class ChupateDos {
 

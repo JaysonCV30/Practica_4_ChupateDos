@@ -1,11 +1,17 @@
-package VistaGrafica;
+package com.mycompany.practica_4_neatbeans;
 
 //import com.mycompany.practica04.ChupateDos;
+import VistaGrafica.Jugadores3_ChupateDos;
+import VistaGrafica.Jugadores4_ChupateDos;
+import VistaGrafica.Jugadores_ChupateDos;
 import java.awt.Color;
 
 public class Juego_ChupateDos extends javax.swing.JFrame {
+    
+    private Juego juego;
 
     public Juego_ChupateDos() {
+        juego =  new Juego();
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);

@@ -3,16 +3,8 @@ package com.mycompany.practica_4_neatbeans;
 import java.util.ArrayList;
 
 /**
- *
- * @authors Andres Le Gresley - Paul Chavez
- *
  * Esta clase modela la mesa de juego en la cual los jugadores podran colocar
  * las cartas que se vayan jugando
- *
- * Version (1.0)
- *
- *
- *
  */
 public class MesaDeJuego {
 
