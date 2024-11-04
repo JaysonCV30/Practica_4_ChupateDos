@@ -13,24 +13,18 @@ public class ChupateDos {
     private Baraja baraja;
     private MesaDeJuego mesa;
     private boolean invertido;
+    
+    //atributos para lo grafico
+    //private VistaBaraja barajaGrafica;
+    private Mesa mesaGrafica;
 
     public ChupateDos(int cantidadJugadores) {
         jugadores = new ArrayList();
-        int cartasARepartir = 0;
-        if (cantidadJugadores == 2) {
-            cartasARepartir = 8;
-        } else {
-            if (cantidadJugadores == 3) {
-                cartasARepartir = 7;
-            } else {
-                if (cantidadJugadores == 4) {
-                    cartasARepartir = 6;
-                }
-            }
-        }
-        if (cantidadJugadores != 2 && cantidadJugadores != 3
-                && cantidadJugadores != 4) {
+        int cartasARepartir = 5;
+        
+        if (cantidadJugadores < 2 || cantidadJugadores > 4) {
             System.out.println("La cantidad de jugadores que ingresó es incorrecta");
+            return;
         } else {
             // Creación de jugadores
             for (int i = 0; i < cantidadJugadores; i++) {
@@ -41,19 +35,32 @@ public class ChupateDos {
             mesa = new MesaDeJuego();
             baraja.mezclar();
             invertido = false;
-
+            
+            //barajaGrafica = new VistaBaraja();
+            mesaGrafica = new Mesa();
         }
 
         // Imprimiendo la baraja completa
         System.out.println("Baraja en mesa: ");
         baraja.imprimirCartas();
-
+        
         // Repartiendo las cartas a los jugadores
         for (int i = 0; i < jugadores.size(); i++) {
             for (int j = 0; j < cartasARepartir; j++) {
-                jugadores.get(i).agregarCartaAMano(baraja.darCarta());
+                CartaLogica carta = baraja.darCarta();
+                jugadores.get(i).agregarCartaAMano(carta); 
             }
         }
+        
+        //Crear lista para las cartas que sobraron en la baraja
+        ArrayList<VistaCarta> cartasQueSobraron = new ArrayList<>();
+        for(int i = 0; i < baraja.getSize(); i++){
+            VistaCarta vistaCarta = new VistaCarta(baraja.getCarta(i));
+            cartasQueSobraron.add(vistaCarta);
+        }
+        // Mostrar las cartas en la mesa gráfica
+        mesaGrafica.mostrarCartasEnBaraja(cartasQueSobraron);
+        mesaGrafica.setVisible(true);
 
         // Mostrando la mano de los jugadores
         for (int i = 0; i < jugadores.size(); i++) {

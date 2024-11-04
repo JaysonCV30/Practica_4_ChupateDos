@@ -3,16 +3,8 @@ package com.mycompany.practica_4_neatbeans;
 import java.util.ArrayList;
 
 /**
- *
- * @authors Andres Le Gresley - Paul Chavez
- *
  * Esta clase modela al jugador, el cual podra recibir cartas de la baraja y
  * jugar cartas en la mesa de juego
- *
- * Version (1.0)
- *
- *
- *
  */
 public class Jugador {
 

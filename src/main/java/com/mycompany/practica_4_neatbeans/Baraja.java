@@ -58,11 +58,12 @@ public class Baraja {
     }
 
     // Metodo de acceso a una unica carta de la baraja
-    public CartaLogica getCarta() {
-        if (!baraja.isEmpty()) {
-            return baraja.get(0);
+    public CartaLogica getCarta(int i) {
+        if (i >= 0 && i < baraja.size()) {
+            return baraja.get(i);
         } else {
-            System.out.println("La baraja está vacia");
+            System.out.println("Índice fuera de rango.");
+            //System.out.println("La baraja está vacia");
             return null;
         }
     }

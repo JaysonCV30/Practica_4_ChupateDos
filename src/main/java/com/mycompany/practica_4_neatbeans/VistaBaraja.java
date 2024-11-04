@@ -4,6 +4,9 @@
  */
 package com.mycompany.practica_4_neatbeans;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jayson
@@ -11,11 +14,12 @@ package com.mycompany.practica_4_neatbeans;
 public class VistaBaraja extends javax.swing.JFrame {
 
     private Baraja mazo;
-    private VistaCarta carta;
+    private ArrayList<VistaCarta> cartas;
     
     public VistaBaraja() {
         mazo = new Baraja();
         mazo.mezclar();
+        cartas = new ArrayList<>();
         initComponents();
         agregarCartas();
     }
@@ -30,7 +34,26 @@ public class VistaBaraja extends javax.swing.JFrame {
     
     public void agregarCartas(){
         for(int i = 0; i < mazo.getBaraja().size(); i++){
-            jPanel1.add(new VistaCarta(mazo.getBaraja().get(i)));
+            VistaCarta carta = new VistaCarta(mazo.getBaraja().get(i));
+            jPanel1.add(carta);
+            cartas.add(carta);
+        }
+        jPanel1.revalidate(); 
+        jPanel1.repaint(); 
+    }
+    
+    public ArrayList<VistaCarta> getCartasEnPanel() {
+        return cartas; // Método para obtener las cartas
+    }
+    
+    //Metodo para poder dar una carta
+    public VistaCarta darCarta() {
+        if (!cartas.isEmpty()) {
+            return cartas.remove(0);
+        } else {
+            //System.out.println("La baraja está vacía, no se puede enviar más cartas.");
+            JOptionPane.showMessageDialog(null, "La baraja está vacía, no se puede enviar más cartas.", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
     }
 

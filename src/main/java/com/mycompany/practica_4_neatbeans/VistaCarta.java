@@ -1,6 +1,11 @@
 package com.mycompany.practica_4_neatbeans;
 
-import java.net.URL;
+import java.awt.Image;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -9,10 +14,17 @@ import java.net.URL;
 public class VistaCarta extends javax.swing.JPanel {
 
     private CartaLogica carta;
-    
+
     public VistaCarta(CartaLogica carta) {
         this.carta = carta;
         initComponents();
+        // Escucha cuando el componente se redimensiona
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                cargarImagen();
+            }
+        });
     }
 
     public CartaLogica getCarta() {
@@ -21,9 +33,23 @@ public class VistaCarta extends javax.swing.JPanel {
 
     public void setCarta(CartaLogica carta) {
         this.carta = carta;
+         cargarImagen();
     }
-    
-    
+
+    public void cargarImagen() {
+        // Define la ruta externa aquí (puedes permitir que se pase como argumento)
+        String rutaImagen = "C:\\Users\\Jayson\\Desktop\\UABC\\Semestre 2024-2\\Programación Orientada a Objetos\\Laboratorio\\Codigo_Practicas\\Practica_4_Neatbeans\\src\\main\\java\\resources\\imagen" + carta.getValue() + "_" + carta.getSuit() + ".png";
+        
+        File archivoImagen = new File(rutaImagen);
+
+        if (archivoImagen.exists()) {
+            ImageIcon imagenIcono = new ImageIcon(rutaImagen);
+            Image imagen = imagenIcono.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            jLabel1.setIcon(new ImageIcon(imagen));
+        } else {
+            JOptionPane.showMessageDialog(this, "Imagen no encontrada: " + rutaImagen, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,21 +60,26 @@ public class VistaCarta extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jayson\\Desktop\\UABC\\Semestre 2024-2\\Programación Orientada a Objetos\\Laboratorio\\Codigo_Practicas\\Practica_4_Neatbeans\\src\\main\\java\\resources\\imagen"+getCarta().getValue()+"_"+getCarta().getSuit()+".png"));
+        jPanel1.setMinimumSize(new java.awt.Dimension(130, 180));
+        jPanel1.setPreferredSize(new java.awt.Dimension(130, 180));
+
+        jLabel1.setMaximumSize(new java.awt.Dimension(130, 180));
+        jLabel1.setMinimumSize(new java.awt.Dimension(130, 180));
+        jLabel1.setPreferredSize(new java.awt.Dimension(130, 180));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -65,7 +96,7 @@ public class VistaCarta extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
