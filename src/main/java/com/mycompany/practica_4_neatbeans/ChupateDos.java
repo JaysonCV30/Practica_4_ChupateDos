@@ -25,8 +25,13 @@ public class ChupateDos {
         if (cantidadJugadores < 2 || cantidadJugadores > 4) {
             System.out.println("La cantidad de jugadores que ingresó es incorrecta");
             return;
+        }
+            
+        if (cantidadJugadores != 2 && cantidadJugadores != 3
+                && cantidadJugadores != 4) {
+            System.out.println("La cantidad de jugadores que ingresÃ³ es incorrecta");
         } else {
-            // Creación de jugadores
+            // CreaciÃ³n de jugadores
             for (int i = 0; i < cantidadJugadores; i++) {
                 jugadores.add(new Jugador("Jugador " + (i + 1)));
             }
@@ -102,7 +107,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println("Jugador 1 comió " + contador + " cartas");
+                    System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
                 } else {
                     int contador = 0;
                     do {
@@ -113,7 +118,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
+                    System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
                 }
 
                 System.out.println("Se puso un 2");
@@ -133,7 +138,7 @@ public class ChupateDos {
                             }
                         } while (contador < 4);
 
-                        System.out.println("Jugador 1 comió " + contador + " cartas");
+                        System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
                     } else {
                         int contador = 0;
                         do {
@@ -144,7 +149,7 @@ public class ChupateDos {
                             }
                         } while (contador < 4);
 
-                        System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
+                        System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
                     }
 
                     System.out.println("Se puso un 3");
@@ -152,7 +157,7 @@ public class ChupateDos {
                     if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
                             && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Sota") {
                         mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                        System.out.println("Se cambió la dirección de la partida");
+                        System.out.println("Se cambiÃ³ la direcciÃ³n de la partida");
                         invertido = true;
                         do {
                             invertirPartida();
@@ -172,105 +177,7 @@ public class ChupateDos {
                             } else {
                                 if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == false
                                         && jugadores.get(i).verificarMano(mesa.getUltimaCarta()) == true) {
-                                    System.out.println("Esa carta no se puede poner ");
-                                    boolean continuarJuego = false;
-                                    do {
-                                        System.out.println("Carta en mesa: ");
-                                        System.out.println(mesa.getUltimaCarta());
-                                        Scanner sc2 = new Scanner(System.in);
-                                        System.out.println("Jugador " + (i + 1) + " escoga una carta para colocar ");
-                                        jugadores.get(i).imprimirMano();
-                                        int cartaEscogida2 = sc2.nextInt();
-                                        if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida2-1), mesa.getUltimaCarta()) == true
-                                                && jugadores.get(i).getCarta(cartaEscogida2-1).getValue() == "2") {
-                                            mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida2-1));
-
-                                            if (i == jugadores.size() - 1) {
-                                                int contador = 0;
-                                                do {
-                                                    jugadores.get(0).agregarCartaAMano(baraja.darCarta());
-                                                    contador++;
-                                                    if (baraja.getBaraja().isEmpty()) {
-                                                        llenarBaraja();
-                                                    }
-                                                } while (contador < 2);
-
-                                                System.out.println("Jugador 1 comió " + contador + " cartas");
-                                            } else {
-                                                int contador = 0;
-                                                do {
-                                                    jugadores.get(i + 1).agregarCartaAMano(baraja.darCarta());
-                                                    contador++;
-                                                    if (baraja.getBaraja().isEmpty()) {
-                                                        llenarBaraja();
-                                                    }
-                                                } while (contador < 2);
-
-                                                System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
-                                            }
-
-                                            System.out.println("Se puso un 2");
-                                            continuarJuego = true;
-                                        } else {
-                                            if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                    && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "3") {
-                                                mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-
-                                                if (i == jugadores.size() - 1) {
-                                                    int contador = 0;
-                                                    do {
-                                                        jugadores.get(0).agregarCartaAMano(baraja.darCarta());
-                                                        contador++;
-                                                        if (baraja.getBaraja().isEmpty()) {
-                                                            llenarBaraja();
-                                                        }
-                                                    } while (contador < 4);
-
-                                                    System.out.println("Jugador 1 comió " + contador + " cartas");
-                                                } else {
-                                                    int contador = 0;
-                                                    do {
-                                                        jugadores.get(i + 1).agregarCartaAMano(baraja.darCarta());
-                                                        contador++;
-                                                        if (baraja.getBaraja().isEmpty()) {
-                                                            llenarBaraja();
-                                                        }
-                                                    } while (contador < 4);
-
-                                                    System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
-                                                }
-
-                                                System.out.println("Se puso un 3");
-                                                continuarJuego = true;
-                                            } else {
-                                                if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                        && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Sota") {
-                                                    mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                                                    System.out.println("Se cambió la dirección de la partida");
-                                                    invertido = true;
-                                                    invertirJugadores();
-                                                    do {
-                                                        invertirPartida();
-                                                    } while (invertido == true);
-                                                    continuarJuego = true;
-                                                } else {
-                                                    if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                            && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "As") {
-                                                        mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                                                        System.out.println("Jugador " + (i + 1) + " tira otra vez ");
-                                                        jugarUnaVuelta(i);
-                                                        continuarJuego = true;
-                                                    } else {
-                                                        if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                                || jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Rey") {
-                                                            mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                                                            continuarJuego = true;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    } while (!continuarJuego);
+                                    corregirCartaErronea(i);
 
                                     System.out.println("Carta en mesa: ");
                                     System.out.println(mesa.getUltimaCarta());
@@ -287,7 +194,7 @@ public class ChupateDos {
                                             }
                                         } while (contador<2);
 
-                                        System.out.println("CHUPATE DOS, Jugador " + (i + 1) + " comió " + contador + " cartas");
+                                        System.out.println("CHUPATE DOS, Jugador " + (i + 1) + " comiÃ³ " + contador + " cartas");
                                         
                                     }
                                 }
@@ -334,7 +241,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println("Jugador 1 comió " + contador + " cartas");
+                    System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
                 } else {
                     int contador = 0;
                     do {
@@ -345,7 +252,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
+                    System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
                 }
 
                 System.out.println("Se puso un 2");
@@ -365,7 +272,7 @@ public class ChupateDos {
                             }
                         } while (contador < 4);
 
-                        System.out.println("Jugador 1 comió " + contador + " cartas");
+                        System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
                     } else {
                         int contador = 0;
                         do {
@@ -376,7 +283,7 @@ public class ChupateDos {
                             }
                         } while (contador < 4);
 
-                        System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
+                        System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
                     }
 
                     System.out.println("Se puso un 3");
@@ -384,7 +291,7 @@ public class ChupateDos {
                     if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
                             && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Sota") {
                         mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                        System.out.println("Se cambió la dirección de la partida");
+                        System.out.println("Se cambiÃ³ la direcciÃ³n de la partida");
                         invertido = true;
                         do {
                             invertirPartida();
@@ -403,105 +310,7 @@ public class ChupateDos {
                             } else {
                                 if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == false
                                         && jugadores.get(i).verificarMano(mesa.getUltimaCarta()) == true) {
-                                    System.out.println("Esa carta no se puede poner ");
-                                    boolean continuarJuego = false;
-                                    do {
-                                        System.out.println("Carta en mesa: ");
-                                        System.out.println(mesa.getUltimaCarta());
-                                        Scanner sc2 = new Scanner(System.in);
-                                        System.out.println("Jugador " + (i + 1) + " escoga una carta para colocar ");
-                                        jugadores.get(i).imprimirMano();
-                                        int cartaEscogida2 = sc2.nextInt();
-                                        if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida2-1), mesa.getUltimaCarta()) == true
-                                                && jugadores.get(i).getCarta(cartaEscogida2-1).getValue() == "2") {
-                                            mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida2-1));
-
-                                            if (i == jugadores.size() - 1) {
-                                                int contador = 0;
-                                                do {
-                                                    jugadores.get(0).agregarCartaAMano(baraja.darCarta());
-                                                    contador++;
-                                                    if (baraja.getBaraja().isEmpty()) {
-                                                        llenarBaraja();
-                                                    }
-                                                } while (contador < 2);
-
-                                                System.out.println("Jugador 1 comió " + contador + " cartas");
-                                            } else {
-                                                int contador = 0;
-                                                do {
-                                                    jugadores.get(i + 1).agregarCartaAMano(baraja.darCarta());
-                                                    contador++;
-                                                    if (baraja.getBaraja().isEmpty()) {
-                                                        llenarBaraja();
-                                                    }
-                                                } while (contador < 2);
-
-                                                System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
-                                            }
-
-                                            System.out.println("Se puso un 2");
-                                            continuarJuego = true;
-                                        } else {
-                                            if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                    && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "3") {
-                                                mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-
-                                                if (i == jugadores.size() - 1) {
-                                                    int contador = 0;
-                                                    do {
-                                                        jugadores.get(0).agregarCartaAMano(baraja.darCarta());
-                                                        contador++;
-                                                        if (baraja.getBaraja().isEmpty()) {
-                                                            llenarBaraja();
-                                                        }
-                                                    } while (contador < 4);
-
-                                                    System.out.println("Jugador 1 comió " + contador + " cartas");
-                                                } else {
-                                                    int contador = 0;
-                                                    do {
-                                                        jugadores.get(i + 1).agregarCartaAMano(baraja.darCarta());
-                                                        contador++;
-                                                        if (baraja.getBaraja().isEmpty()) {
-                                                            llenarBaraja();
-                                                        }
-                                                    } while (contador < 4);
-
-                                                    System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
-                                                }
-
-                                                System.out.println("Se puso un 3");
-                                                continuarJuego = true;
-                                            } else {
-                                                if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                        && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Sota") {
-                                                    mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                                                    System.out.println("Se cambió la dirección de la partida");
-                                                    invertido = true;
-                                                    invertirJugadores();
-                                                    do {
-                                                        invertirPartida();
-                                                    } while (invertido == true);
-                                                    continuarJuego = true;
-                                                } else {
-                                                    if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                            && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "As") {
-                                                        mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                                                        System.out.println("Jugador " + (i + 1) + " tira otra vez ");
-                                                        jugarUnaVuelta(i);
-                                                        continuarJuego = true;
-                                                    } else {
-                                                        if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                                || jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Rey") {
-                                                            mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                                                            continuarJuego = true;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    } while (!continuarJuego);
+                                    corregirCartaErronea(i);
 
                                     System.out.println("Carta en mesa: ");
                                     System.out.println(mesa.getUltimaCarta());
@@ -518,7 +327,7 @@ public class ChupateDos {
                                             }
                                         } while (contador<2);
 
-                                        System.out.println("CHUPATE DOS, Jugador " + (i + 1) + " comió " + contador + " cartas");
+                                        System.out.println("CHUPATE DOS, Jugador " + (i + 1) + " comiÃ³ " + contador + " cartas");
                                         
                                     }
                                 }
@@ -553,7 +362,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println("Jugador 1 comió " + contador + " cartas");
+                    System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
                 } else {
                     int contador = 0;
                     do {
@@ -564,7 +373,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
+                    System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
                 }
 
                 System.out.println("Se puso un 2");
@@ -583,7 +392,7 @@ public class ChupateDos {
                             }
                         } while (contador < 4);
 
-                        System.out.println("Jugador 1 comió " + contador + " cartas");
+                        System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
                     } else {
                         int contador = 0;
                         do {
@@ -594,7 +403,7 @@ public class ChupateDos {
                             }
                         } while (contador < 4);
 
-                        System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
+                        System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
                     }
 
                     System.out.println("Se puso un 3");
@@ -602,7 +411,7 @@ public class ChupateDos {
                     if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
                             && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Sota") {
                         mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                        System.out.println("Se cambió la dirección de la partida");
+                        System.out.println("Se cambiÃ³ la direcciÃ³n de la partida");
                         invertido = true;
                         invertirJugadores();
                         do {
@@ -622,108 +431,8 @@ public class ChupateDos {
                             } else {
                                 if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == false
                                         && jugadores.get(i).verificarMano(mesa.getUltimaCarta()) == true) {
-
-                                    System.out.println("Esa carta no se puede poner ");
-                                    boolean continuarJuego = false;
-                                    do {
-                                        System.out.println("Carta en mesa: ");
-                                        System.out.println(mesa.getUltimaCarta());
-                                        Scanner sc2 = new Scanner(System.in);
-                                        System.out.println("Jugador " + (i + 1) + " escoga una carta para colocar ");
-                                        jugadores.get(i).imprimirMano();
-                                        int cartaEscogida2 = sc2.nextInt();
-                                        if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                && jugadores.get(i).getCarta(cartaEscogida2-1).getValue() == "2") {
-                                            mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida2-1));
-
-                                            if (i == jugadores.size() - 1) {
-                                                int contador = 0;
-                                                do {
-                                                    jugadores.get(0).agregarCartaAMano(baraja.darCarta());
-                                                    contador++;
-                                                    if (baraja.getBaraja().isEmpty()) {
-                                                        llenarBaraja();
-                                                    }
-                                                } while (contador < 2);
-
-                                                System.out.println("Jugador 1 comió " + contador + " cartas");
-                                            } else {
-                                                int contador = 0;
-                                                do {
-                                                    jugadores.get(i + 1).agregarCartaAMano(baraja.darCarta());
-                                                    contador++;
-                                                    if (baraja.getBaraja().isEmpty()) {
-                                                        llenarBaraja();
-                                                    }
-                                                } while (contador < 2);
-
-                                                System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
-                                            }
-
-                                            System.out.println("Se puso un 2");
-                                            continuarJuego = true;
-                                        } else {
-                                            if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                    && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "3") {
-                                                mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-
-                                                if (i == jugadores.size() - 1) {
-                                                    int contador = 0;
-                                                    do {
-                                                        jugadores.get(0).agregarCartaAMano(baraja.darCarta());
-                                                        contador++;
-                                                        if (baraja.getBaraja().isEmpty()) {
-                                                            llenarBaraja();
-                                                        }
-                                                    } while (contador < 4);
-
-                                                    System.out.println("Jugador 1 comió " + contador + " cartas");
-                                                } else {
-                                                    int contador = 0;
-                                                    do {
-                                                        jugadores.get(i + 1).agregarCartaAMano(baraja.darCarta());
-                                                        contador++;
-                                                        if (baraja.getBaraja().isEmpty()) {
-                                                            llenarBaraja();
-                                                        }
-                                                    } while (contador < 4);
-
-                                                    System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
-                                                }
-
-                                                System.out.println("Se puso un 3");
-                                                continuarJuego = true;
-                                            } else {
-                                                if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                        && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Sota") {
-                                                    mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                                                    System.out.println("Se cambió la dirección de la partida");
-                                                    invertido = true;
-                                                    invertirJugadores();
-                                                    do {
-                                                        invertirPartida();
-                                                    } while (invertido == true);
-                                                    continuarJuego = true;
-                                                } else {
-                                                    if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                            && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "As") {
-                                                        mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                                                        System.out.println("Jugador " + (i + 1) + " tira otra vez ");
-                                                        jugarUnaVuelta(i);
-                                                        continuarJuego = true;
-                                                    } else {
-                                                        if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
-                                                                || jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Rey") {
-                                                            mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                                                            continuarJuego = true;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                    } while (!continuarJuego);
-
+                                    corregirCartaErronea(i);
+                                    
                                     System.out.println("Carta en mesa: ");
                                     System.out.println(mesa.getUltimaCarta());
 
@@ -739,7 +448,7 @@ public class ChupateDos {
                                             }
                                         } while (jugadores.get(i).verificarMano(mesa.getUltimaCarta()) == false);
 
-                                        System.out.println("CHUPATE DOS, Jugador " + (i + 1) + " comió " + contador + " cartas");
+                                        System.out.println("CHUPATE DOS, Jugador " + (i + 1) + " comiÃ³ " + contador + " cartas");
                                         
                                     }
                                 }
@@ -774,7 +483,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println("Jugador 1 comió " + contador + " cartas");
+                    System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
                 } else {
                     int contador = 0;
                     do {
@@ -785,7 +494,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
+                    System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
                 }
 
                 System.out.println("Se puso un 2");
@@ -804,7 +513,7 @@ public class ChupateDos {
                             }
                         } while (contador < 4);
 
-                        System.out.println("Jugador 1 comió " + contador + " cartas");
+                        System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
                     } else {
                         int contador = 0;
                         do {
@@ -815,7 +524,7 @@ public class ChupateDos {
                             }
                         } while (contador < 4);
 
-                        System.out.println("Jugador " + (i + 2) + " comió " + contador + " cartas");
+                        System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
                     }
 
                     System.out.println("Se puso un 3");
@@ -823,7 +532,7 @@ public class ChupateDos {
                     if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
                             && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "Sota") {
                         mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
-                        System.out.println("Se cambió la dirección de la partida");
+                        System.out.println("Se cambiÃ³ la direcciÃ³n de la partida");
                         invertido = false;
                         invertirJugadores();
                         do {
@@ -854,7 +563,7 @@ public class ChupateDos {
                                     System.out.println(mesa.getUltimaCarta());
                                 } else {
                                     if (cartaEscogida-1 < 0 || cartaEscogida-1 > jugadores.get(i).getManoSize()) {
-                                        System.out.println("Ingresó un número invalido ");
+                                        System.out.println("IngresÃ³ un nÃºmero invalido ");
                                         boolean continuarJuego = false;
                                         do {
                                             jugarUnaVuelta(i);
@@ -874,7 +583,7 @@ public class ChupateDos {
                                                 }
                                             } while (contador<2);
 
-                                            System.out.println("CHUPATE DOS, Jugador " + (i + 1) + " comió " + contador + " cartas");
+                                            System.out.println("CHUPATE DOS, Jugador " + (i + 1) + " comiÃ³ " + contador + " cartas");
                                             
                                         }
                                     }
@@ -912,7 +621,7 @@ public class ChupateDos {
         }
         baraja.mezclar();
         System.out.println("Las cartas se acabaron, mezclando baraja... ");
-        System.out.println("Ya se mezcló ");
+        System.out.println("Ya se mezclÃ³ ");
     }
 
     public void invertirJugadores() {
@@ -921,5 +630,106 @@ public class ChupateDos {
             nombresInvertidos.add(jugadores.get(i));
         }
         jugadores = nombresInvertidos;
+    }
+    public void corregirCartaErronea(int i){
+        System.out.println("Esa carta no se puede poner ");
+        boolean continuarJuego = false;
+        do {
+            System.out.println("Carta en mesa: ");
+            System.out.println(mesa.getUltimaCarta());
+            Scanner sc2 = new Scanner(System.in);
+            System.out.println("Jugador " + (i + 1) + " escoga una carta para colocar ");
+            jugadores.get(i).imprimirMano();
+            int cartaEscogida2 = sc2.nextInt();
+            if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida2-1), mesa.getUltimaCarta()) == true
+                && jugadores.get(i).getCarta(cartaEscogida2-1).getValue() == "2") {
+                mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida2-1));
+
+                if (i == jugadores.size() - 1) {
+                int contador = 0;
+                do {
+                    jugadores.get(0).agregarCartaAMano(baraja.darCarta());
+                    contador++;
+                    if (baraja.getBaraja().isEmpty()) {
+                        llenarBaraja();
+                    }
+                } while (contador < 2);
+
+                 System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
+                } else {
+                    int contador = 0;
+                    do {
+                        jugadores.get(i + 1).agregarCartaAMano(baraja.darCarta());
+                        contador++;
+                        if (baraja.getBaraja().isEmpty()) {
+                        llenarBaraja();
+                        }
+                    } while (contador < 2);
+
+                    System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
+                }
+
+                System.out.println("Se puso un 2");
+                continuarJuego = true;
+                } else {
+                    if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida2-1), mesa.getUltimaCarta()) == true
+                        && jugadores.get(i).getCarta(cartaEscogida2-1).getValue() == "3") {
+                        mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida2-1));
+
+                        if (i == jugadores.size() - 1) {
+                            int contador = 0;
+                            do {
+                                jugadores.get(0).agregarCartaAMano(baraja.darCarta());
+                                contador++;
+                                if (baraja.getBaraja().isEmpty()) {
+                                    llenarBaraja();
+                                }
+                            } while (contador < 4);
+
+                            System.out.println("Jugador 1 comiÃ³ " + contador + " cartas");
+                        } else {
+                            int contador = 0;
+                            do {
+                                jugadores.get(i + 1).agregarCartaAMano(baraja.darCarta());
+                                contador++;
+                                if (baraja.getBaraja().isEmpty()) {
+                                    llenarBaraja();
+                                }
+                            } while (contador < 4);
+
+                            System.out.println("Jugador " + (i + 2) + " comiÃ³ " + contador + " cartas");
+                        }
+
+                        System.out.println("Se puso un 3");
+                        continuarJuego = true;
+                    } else {
+                        if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida2-1), mesa.getUltimaCarta()) == true
+                            && jugadores.get(i).getCarta(cartaEscogida2-1).getValue() == "Sota") {
+                            mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida2-1));
+                            System.out.println("Se cambiÃ³ la direcciÃ³n de la partida");
+                            invertido = true;
+                            invertirJugadores();
+                            do {
+                                invertirPartida();
+                            } while (invertido == true);
+                            continuarJuego = true;
+                         } else {
+                             if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida2-1), mesa.getUltimaCarta()) == true
+                                && jugadores.get(i).getCarta(cartaEscogida2-1).getValue() == "As") {
+                                mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida2-1));
+                                System.out.println("Jugador " + (i + 1) + " tira otra vez ");
+                                jugarUnaVuelta(i);
+                                continuarJuego = true;
+                            } else {
+                                if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida2-1), mesa.getUltimaCarta()) == true
+                                    || jugadores.get(i).getCarta(cartaEscogida2-1).getValue() == "Rey") {
+                                    mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida2-1));
+                                    continuarJuego = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            } while (!continuarJuego);
     }
 }
