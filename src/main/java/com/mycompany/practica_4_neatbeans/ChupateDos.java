@@ -58,15 +58,17 @@ public class ChupateDos {
             VistaCarta vistaCarta = new VistaCarta(baraja.getCarta(i));
             cartasQueSobraron.add(vistaCarta);
         }
-        // Mostrar las cartas en la mesa gráfica
-        mesaGrafica.mostrarCartasEnBaraja(cartasQueSobraron);
-        mesaGrafica.setVisible(true);
 
         // Mostrando la mano de los jugadores
         for (int i = 0; i < jugadores.size(); i++) {
             System.out.println("Jugador " + (i + 1) + ":");
             jugadores.get(i).imprimirMano();
         }
+        
+        // Mostrar la mesa
+        mesaGrafica.mostrarCartasEnBaraja(cartasQueSobraron);
+        mesaGrafica.mostrarCartasJugadores(jugadores);
+        mesaGrafica.setVisible(true);
 
         iniciarJuego();
     }
