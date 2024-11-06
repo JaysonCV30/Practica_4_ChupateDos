@@ -48,15 +48,28 @@ public class ChupateDos {
         // Imprimiendo la baraja completa
         System.out.println("Baraja en mesa: ");
         baraja.imprimirCartas();
+        System.out.println(baraja.getSize());
         
         // Repartiendo las cartas a los jugadores
-        for (int i = 0; i < jugadores.size(); i++) {
+        /*for (int i = 0; i < jugadores.size(); i++) {
             for (int j = 0; j < cartasARepartir; j++) {
                 CartaLogica carta = baraja.darCarta();
                 jugadores.get(i).agregarCartaAMano(carta); 
             }
+        }*/
+        
+        // Repartiendo las cartasGraficas a los jugadores
+        for (int i = 0; i < jugadores.size(); i++) {
+            for (int j = 0; j < cartasARepartir; j++) {
+                CartaLogica carta = baraja.darCarta();
+                jugadores.get(i).agregarCartaAMano(carta); 
+                VistaCarta cartaGrafica = new VistaCarta(carta);
+                jugadores.get(i).agregarCartaGraficaAMano(cartaGrafica); 
+            }
         }
         
+        System.out.println("Baraja ya repartida");
+        System.out.println(baraja.getSize());
         //Crear lista para las cartas que sobraron en la baraja
         ArrayList<VistaCarta> cartasQueSobraron = new ArrayList<>();
         for(int i = 0; i < baraja.getSize(); i++){
@@ -71,7 +84,6 @@ public class ChupateDos {
         }
         
         // Mostrar la mesa
-        mesaGrafica.mostrarCartasEnBaraja(cartasQueSobraron);
         mesaGrafica.mostrarCartasJugadores(jugadores);
         mesaGrafica.setVisible(true);
 

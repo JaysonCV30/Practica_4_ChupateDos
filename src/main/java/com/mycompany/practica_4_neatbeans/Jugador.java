@@ -10,16 +10,22 @@ public class Jugador {
 
     private String nombre;
     private ArrayList<CartaLogica> mano;
+    private ArrayList<VistaCarta> manoGrafica;
 
     //Constructor de la clase
     public Jugador(String nombre) {
         this.nombre = nombre; //Se le asigna un nombre al jugador
         this.mano = new ArrayList<>();  //Se crea la mano del jugador
+        this.manoGrafica = new ArrayList<>();
     }
 
     //Metodo para tomar una carta de la baraja
     public void agregarCartaAMano(CartaLogica carta) {
         mano.add(carta);
+    }
+    
+    public void agregarCartaGraficaAMano(VistaCarta cartaGrafica) {
+        manoGrafica.add(cartaGrafica);
     }
 
     // Metodo para saber si la mano esta vacia
@@ -40,6 +46,14 @@ public class Jugador {
     public CartaLogica getCarta(int indice) {
         if (!estaVaciaMano() && indice<mano.size()) {
             return mano.get(indice);
+        } else {
+            return null; // Mano esta vacia
+        }
+    }
+    
+    public VistaCarta getCartaGrafica(int indice) {
+        if (!estaVaciaMano() && indice<manoGrafica.size()) {
+            return manoGrafica.get(indice);
         } else {
             return null; // Mano esta vacia
         }

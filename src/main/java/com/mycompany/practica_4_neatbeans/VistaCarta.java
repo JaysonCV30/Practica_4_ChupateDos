@@ -14,9 +14,11 @@ import javax.swing.JOptionPane;
 public class VistaCarta extends javax.swing.JPanel {
 
     private CartaLogica carta;
+    private boolean volteada;
 
     public VistaCarta(CartaLogica carta) {
         this.carta = carta;
+        this.volteada = true;
         initComponents();
         // Escucha cuando el componente se redimensiona
         addComponentListener(new ComponentAdapter() {
@@ -33,12 +35,22 @@ public class VistaCarta extends javax.swing.JPanel {
 
     public void setCarta(CartaLogica carta) {
         this.carta = carta;
-         cargarImagen();
+        cargarImagen();
+    }
+
+    public void voltearCarta() {
+        volteada = !volteada; // Cambia el estado de la carta (de visible a volteada o viceversa)
+        cargarImagen(); // Recargar la imagen dependiendo de si está volteada o no
     }
 
     public void cargarImagen() {
+        String rutaImagen;
         // Define la ruta externa aquí (puedes permitir que se pase como argumento)
-        String rutaImagen = "C:\\Users\\Jayson\\Desktop\\UABC\\Semestre 2024-2\\Programación Orientada a Objetos\\Laboratorio\\Codigo_Practicas\\Practica_4_Neatbeans\\src\\main\\java\\resources\\imagen" + carta.getValue() + "_" + carta.getSuit() + ".png";
+        if (volteada) {
+            rutaImagen = "C:\\Users\\Jayson\\Desktop\\UABC\\Semestre 2024-2\\Programación Orientada a Objetos\\Laboratorio\\Codigo_Practicas\\Practica_4_Neatbeans\\src\\main\\java\\resources\\imagen" + carta.getValue() + "_" + carta.getSuit() + ".png";
+        } else {
+            rutaImagen = "C:\\Users\\Jayson\\Desktop\\UABC\\Semestre 2024-2\\Programación Orientada a Objetos\\Laboratorio\\Codigo_Practicas\\Practica_4_Neatbeans\\src\\main\\java\\resources\\carta_Volteada.png";
+        }
         
         File archivoImagen = new File(rutaImagen);
 
@@ -50,6 +62,7 @@ public class VistaCarta extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Imagen no encontrada: " + rutaImagen, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,23 +76,28 @@ public class VistaCarta extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(100, 130));
+        setPreferredSize(new java.awt.Dimension(100, 130));
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(130, 180));
-        jPanel1.setPreferredSize(new java.awt.Dimension(130, 180));
+        jPanel1.setBackground(new java.awt.Color(161, 130, 98));
+        jPanel1.setMinimumSize(new java.awt.Dimension(100, 130));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 130));
 
-        jLabel1.setMaximumSize(new java.awt.Dimension(130, 180));
-        jLabel1.setMinimumSize(new java.awt.Dimension(130, 180));
-        jLabel1.setPreferredSize(new java.awt.Dimension(130, 180));
+        jLabel1.setMaximumSize(new java.awt.Dimension(3000, 3000));
+        jLabel1.setMinimumSize(new java.awt.Dimension(100, 130));
+        jLabel1.setPreferredSize(new java.awt.Dimension(100, 130));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
