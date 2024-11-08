@@ -3,6 +3,8 @@ package com.mycompany.practica_4_neatbeans;
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -14,12 +16,24 @@ import javax.swing.JOptionPane;
 public class VistaCarta extends javax.swing.JPanel {
 
     private CartaLogica carta;
-    private boolean volteada;
+    private Mesa mesa;
 
-    public VistaCarta(CartaLogica carta) {
+    public VistaCarta(CartaLogica carta,Mesa mesa) {
         this.carta = carta;
-        this.volteada = true;
+        this.mesa = mesa;
         initComponents();
+        
+        // Agregar un MouseListener para detectar el clic en la carta
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Verifica si el evento llega aquí
+                System.out.println("Carta clickeada: " + carta);
+                // Cuando se hace clic en la carta, se llama a la función para jugarla
+                jugarCarta();
+            }
+        });
+        
         // Escucha cuando el componente se redimensiona
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -38,19 +52,9 @@ public class VistaCarta extends javax.swing.JPanel {
         cargarImagen();
     }
 
-    public void voltearCarta() {
-        volteada = !volteada; // Cambia el estado de la carta (de visible a volteada o viceversa)
-        cargarImagen(); // Recargar la imagen dependiendo de si está volteada o no
-    }
-
     public void cargarImagen() {
         String rutaImagen;
-        // Define la ruta externa aquí (puedes permitir que se pase como argumento)
-        if (volteada) {
-            rutaImagen = "C:\\Users\\Jayson\\Desktop\\UABC\\Semestre 2024-2\\Programación Orientada a Objetos\\Laboratorio\\Codigo_Practicas\\Practica_4_Neatbeans\\src\\main\\java\\resources\\imagen" + carta.getValue() + "_" + carta.getSuit() + ".png";
-        } else {
-            rutaImagen = "C:\\Users\\Jayson\\Desktop\\UABC\\Semestre 2024-2\\Programación Orientada a Objetos\\Laboratorio\\Codigo_Practicas\\Practica_4_Neatbeans\\src\\main\\java\\resources\\carta_Volteada.png";
-        }
+        rutaImagen = "C:\\Users\\Jayson\\Desktop\\UABC\\Semestre 2024-2\\Programación Orientada a Objetos\\Laboratorio\\Codigo_Practicas\\Practica_4_Neatbeans\\src\\main\\java\\resources\\imagen" + carta.getValue() + "_" + carta.getSuit() + ".png";
         
         File archivoImagen = new File(rutaImagen);
 
@@ -63,6 +67,10 @@ public class VistaCarta extends javax.swing.JPanel {
         }
     }
 
+    public void jugarCarta(){
+        mesa.moverCartaAJugadas(this);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

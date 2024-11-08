@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Mesa extends javax.swing.JFrame {
@@ -70,12 +71,48 @@ public class Mesa extends javax.swing.JFrame {
             }
 
             for (int j = 0; j < jugador.getManoSize(); j++) {
-                VistaCarta vistaCarta = new VistaCarta(jugador.getCarta(j));
+                VistaCarta vistaCarta = new VistaCarta(jugador.getCarta(j),this);
                 zonaJugador.add(vistaCarta);
             }
             zonaJugador.revalidate();
             zonaJugador.repaint();
         }
+    }
+
+    public void actualizarTurno(int jugadorActual) {
+        // Desactivar todos los botones
+        for (ArrayList<JButton> botones : botonesJugadores) {
+            for (JButton boton : botones) {
+                boton.setEnabled(false);
+            }
+        }
+
+        // Activar los botones solo para el jugador que tiene el turno
+        ArrayList<JButton> botonesJugadorActual = botonesJugadores.get(jugadorActual);
+        for (JButton boton : botonesJugadorActual) {
+            boton.setEnabled(true);
+        }
+    }
+
+    public void mostrarGanador(int jugadorGanador) {
+        // Mostrar mensaje indicando el ganador
+        JOptionPane.showMessageDialog(this, "¡El ganador es: " + labelsDeJugadores.get(jugadorGanador).getText() + "!");
+    }
+
+    public void moverCartaAJugadas(VistaCarta vistaCarta) {
+        cartasJugadas.removeAll();
+        JPanel zonaJugador = (JPanel) vistaCarta.getParent();
+        zonaJugador.remove(vistaCarta);
+
+        // Agregar la carta al panel de cartas jugadas
+        cartasJugadas.add(vistaCarta);
+        
+        zonaJugador.revalidate();
+        zonaJugador.repaint();
+
+        // Actualizar la interfaz para mostrar la carta en el panel de cartas jugadas
+        cartasJugadas.revalidate();
+        cartasJugadas.repaint();
     }
 
     /**
@@ -162,17 +199,6 @@ public class Mesa extends javax.swing.JFrame {
         zona_Jugador4.setLayout(new java.awt.GridLayout(5, 1, 0, 3));
 
         cartasJugadas.setMinimumSize(new java.awt.Dimension(100, 130));
-
-        javax.swing.GroupLayout cartasJugadasLayout = new javax.swing.GroupLayout(cartasJugadas);
-        cartasJugadas.setLayout(cartasJugadasLayout);
-        cartasJugadasLayout.setHorizontalGroup(
-            cartasJugadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        cartasJugadasLayout.setVerticalGroup(
-            cartasJugadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
-        );
 
         ponerCarta1_Jugador1.setText("Poner");
         ponerCarta1_Jugador1.addActionListener(new java.awt.event.ActionListener() {
@@ -282,7 +308,7 @@ public class Mesa extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                                 .addComponent(nombreJugador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

@@ -21,11 +21,17 @@ public class ChupateDos {
     public ChupateDos(int cantidadJugadores) {
         jugadores = new ArrayList();
         int cartasARepartir = 5;
+        
+        if (cantidadJugadores < 2 || cantidadJugadores > 4) {
+            System.out.println("La cantidad de jugadores que ingresó es incorrecta");
+            return;
+        }
+            
         if (cantidadJugadores != 2 && cantidadJugadores != 3
                 && cantidadJugadores != 4) {
-            System.out.println("La cantidad de jugadores que ingresó es incorrecta");
+            System.out.println("La cantidad de jugadores que ingresÃ³ es incorrecta");
         } else {
-            // Creacion de jugadores
+            // CreaciÃ³n de jugadores
             for (int i = 0; i < cantidadJugadores; i++) {
                 jugadores.add(new Jugador("Jugador " + (i + 1)));
             }
@@ -42,26 +48,20 @@ public class ChupateDos {
         // Imprimiendo la baraja completa
         System.out.println("Baraja en mesa: ");
         baraja.imprimirCartas();
+        System.out.println(baraja.getSize());
         
         // Repartiendo las cartasGraficas a los jugadores
         for (int i = 0; i < jugadores.size(); i++) {
             for (int j = 0; j < cartasARepartir; j++) {
                 CartaLogica carta = baraja.darCarta();
                 jugadores.get(i).agregarCartaAMano(carta); 
-                VistaCarta cartaGrafica = new VistaCarta(carta);
+                VistaCarta cartaGrafica = new VistaCarta(carta,mesaGrafica);
                 jugadores.get(i).agregarCartaGraficaAMano(cartaGrafica); 
             }
         }
         
-        //PENDIENTE actualizar baraja cuando comen
         System.out.println("Baraja ya repartida");
         System.out.println(baraja.getSize());
-        //Crear lista para las cartas que sobraron en la baraja
-        ArrayList<VistaCarta> cartasQueSobraron = new ArrayList<>();
-        for(int i = 0; i < baraja.getSize(); i++){
-            VistaCarta vistaCarta = new VistaCarta(baraja.getCarta(i));
-            cartasQueSobraron.add(vistaCarta);
-        }
 
         // Mostrando la mano de los jugadores
         for (int i = 0; i < jugadores.size(); i++) {
@@ -81,8 +81,11 @@ public class ChupateDos {
             Scanner sc = new Scanner(System.in);
             int cartaEscogida;
             boolean primeraCarta=false;
+            
         while(hayGanador==false){
            for (int i = 0; i < jugadores.size(); i++) {
+               mesaGrafica.actualizarTurno(i); // Pasar al siguiente jugador visualmente
+               
                if(primeraCarta==true){
                    System.out.println("Carta en mesa: ");
                    System.out.println(mesa.getUltimaCarta());
@@ -92,8 +95,9 @@ public class ChupateDos {
                    cartaEscogida = sc.nextInt();
                    i=verificarCartaJugada(i,cartaEscogida);
                    hayGanador=determinarGanador();
-                   if(hayGanador){                    
-                    break;
+                    if(hayGanador){  
+                       mesaGrafica.mostrarGanador(i);
+                       break;
                     }
                 }
                 else{
@@ -137,8 +141,9 @@ public class ChupateDos {
                         mesa.agregarCartaAMesa(jugadores.get(0).colocarCarta(cartaEscogida-1));
                         primeraCarta=true;
                     }
-                   
-                }    
+                }
+                // Actualizar la interfaz gráfica después de la jugada
+                mesaGrafica.mostrarCartasJugadores(jugadores);
             }
         }        
     }
@@ -165,6 +170,14 @@ public class ChupateDos {
                 break;
             }
         }
+    }
+
+    public void invertirJugadores() {
+        ArrayList<Jugador> nombresInvertidos = new ArrayList<>();
+        for (int i = jugadores.size() - 1; i >= 0; i--) {
+            nombresInvertidos.add(jugadores.get(i));
+        }
+        jugadores = nombresInvertidos;
     }
 
     public boolean banderaParaManosDeJugadores() {
@@ -195,14 +208,7 @@ public class ChupateDos {
         }
         baraja.mezclar();
         System.out.println("Las cartas se acabaron, mezclando baraja... ");
-    }
-
-    public void invertirJugadores() {
-        ArrayList<Jugador> nombresInvertidos = new ArrayList<>();
-        for (int i = jugadores.size() - 1; i >= 0; i--) {
-            nombresInvertidos.add(jugadores.get(i));
-        }
-        jugadores = nombresInvertidos;
+        System.out.println("Ya se mezclÃ³ ");
     }
     
     public int corregirCartaErronea(int i){

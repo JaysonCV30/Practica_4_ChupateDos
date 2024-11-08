@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.practica_4_neatbeans;
 
 import java.util.ArrayList;
@@ -21,7 +17,7 @@ public class VistaBaraja extends javax.swing.JFrame {
         mazo.mezclar();
         cartas = new ArrayList<>();
         initComponents();
-        agregarCartas();
+        //agregarCartas();
     }
     
     public Baraja getMazo() {
@@ -32,7 +28,7 @@ public class VistaBaraja extends javax.swing.JFrame {
         this.mazo = mazo;
     }
     
-    public void agregarCartas(){
+    /*public void agregarCartas(){
         for(int i = 0; i < mazo.getBaraja().size(); i++){
             VistaCarta carta = new VistaCarta(mazo.getBaraja().get(i));
             jPanel1.add(carta);
@@ -40,7 +36,7 @@ public class VistaBaraja extends javax.swing.JFrame {
         }
         jPanel1.revalidate(); 
         jPanel1.repaint(); 
-    }
+    }*/
     
     public ArrayList<VistaCarta> getCartasEnPanel() {
         return cartas; // Método para obtener las cartas
@@ -113,6 +109,9 @@ public class VistaBaraja extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VistaBaraja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
