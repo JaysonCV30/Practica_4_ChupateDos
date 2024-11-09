@@ -79,7 +79,7 @@ public class ChupateDos {
     public void iniciarJuego() {
             boolean hayGanador=false;
             Scanner sc = new Scanner(System.in);
-            int cartaEscogida;
+            CartaLogica cartaEscogida;
             boolean primeraCarta=false;
             
         while(hayGanador==false){
@@ -93,7 +93,8 @@ public class ChupateDos {
                    sc = new Scanner(System.in);
                    System.out.println(jugadores.get(i).getNombre()+ " escoga una carta para colocar ");
                    jugadores.get(i).imprimirMano();
-                   cartaEscogida = sc.nextInt();  //Aqui seria el cambio, en vez de que reciba un int en consola, que reciba una carta logica
+                   //cartaEscogida = sc.nextInt();  //Aqui seria el cambio, en vez de que reciba un int en consola, que reciba una carta logica
+                   cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionada();
                    i=verificarCartaJugada(i,cartaEscogida);
                    hayGanador=determinarGanador();
                     if(hayGanador){  
@@ -104,7 +105,7 @@ public class ChupateDos {
                 else{
                    System.out.println("Jugador 1 esocga una carta para colocar");
                    jugadores.get(0).imprimirMano();
-                   cartaEscogida = sc.nextInt();  
+                   //cartaEscogida = sc.nextInt();  
                    if(jugadores.get(0).getCarta(cartaEscogida-1).getValue() == "2"){
                        mesa.agregarCartaAMesa(jugadores.get(0).colocarCarta(cartaEscogida-1));
                        jugadores.get(1).agregarCartaAMano(baraja.darCarta());
@@ -317,7 +318,7 @@ public class ChupateDos {
         return i;
     }
     
-    public int verificarCartaJugada(int i,int cartaEscogida){
+    public int verificarCartaJugada(int i,CartaLogica cartaEscogida){
         if (verificarCarta(jugadores.get(i).getCarta(cartaEscogida-1), mesa.getUltimaCarta()) == true
                     && jugadores.get(i).getCarta(cartaEscogida-1).getValue() == "2") {
                 mesa.agregarCartaAMesa(jugadores.get(i).colocarCarta(cartaEscogida-1));
@@ -332,7 +333,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println(jugadores.get(0).getNombre()+"comió³ " + contador + " cartas");
+                    System.out.println(jugadores.get(0).getNombre()+"comió " + contador + " cartas");
                 } else {
                     int contador = 0;
                     do {
@@ -343,7 +344,7 @@ public class ChupateDos {
                         }
                     } while (contador < 2);
 
-                    System.out.println(jugadores.get(i+1).getNombre()+ " comió³ " + contador + " cartas");
+                    System.out.println(jugadores.get(i+1).getNombre()+ " comió " + contador + " cartas");
                 }
 
                 System.out.println("Se puso un 2");

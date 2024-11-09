@@ -31,7 +31,7 @@ public class VistaCarta extends javax.swing.JPanel {
                 // Verifica si el evento llega aquí
                 System.out.println("Carta clickeada: " + carta);
                 // Cuando se hace clic en la carta, se llama a la función para jugarla
-                jugarCarta();
+                cartaSeleccionada();
             }
         });
         
@@ -68,9 +68,9 @@ public class VistaCarta extends javax.swing.JPanel {
         }
     }
 
-    public void jugarCarta(){
+    public void cartaSeleccionada(){
         //mesa.moverCartaAJugadas(this);
-        mesa.obtenerUltimaCartaSeleccionada(this);
+        mesa.guardarUltimaCartaSeleccionada(this);
     }
     
     /**
