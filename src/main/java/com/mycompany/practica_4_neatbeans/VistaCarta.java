@@ -27,6 +27,7 @@ public class VistaCarta extends javax.swing.JPanel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //mesa.obtenerUltimaCartaSeleccionada(this);
                 // Verifica si el evento llega aquí
                 System.out.println("Carta clickeada: " + carta);
                 // Cuando se hace clic en la carta, se llama a la función para jugarla
@@ -68,7 +69,8 @@ public class VistaCarta extends javax.swing.JPanel {
     }
 
     public void jugarCarta(){
-        mesa.moverCartaAJugadas(this);
+        //mesa.moverCartaAJugadas(this);
+        mesa.obtenerUltimaCartaSeleccionada(this);
     }
     
     /**

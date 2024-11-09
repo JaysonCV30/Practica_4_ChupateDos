@@ -11,13 +11,17 @@ public class Mesa extends javax.swing.JFrame {
 
     private ArrayList<JPanel> panelesZonasJugadores;
     private ArrayList<JLabel> labelsDeJugadores;
-    private ArrayList<ArrayList<JButton>> botonesJugadores;
+    private ArrayList<CartaLogica> cartasLogicasJugadas;
+    private ArrayList<CartaLogica> ultimasCartasSeleccionadas;
 
     public Mesa() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         pack();
+
+        cartasLogicasJugadas = new ArrayList<>();
+        ultimasCartasSeleccionadas = new ArrayList<>();
 
         // Inicializar paneles para las cartas de los jugadores
         panelesZonasJugadores = new ArrayList<>();
@@ -32,11 +36,11 @@ public class Mesa extends javax.swing.JFrame {
         labelsDeJugadores.add(nombreJugador3);
         labelsDeJugadores.add(nombreJugador4);
 
-        botonesJugadores = new ArrayList<>();
+        /*botonesJugadores = new ArrayList<>();
         botonesJugadores.add(new ArrayList<>(List.of(ponerCarta1_Jugador1, ponerCarta2_Jugador1, ponerCarta3_Jugador1, ponerCarta4_Jugador1, ponerCarta5_Jugador1)));
         botonesJugadores.add(new ArrayList<>(List.of(ponerCarta1_Jugador2, ponerCarta2_Jugador2, ponerCarta3_Jugador2, ponerCarta4_Jugador2, ponerCarta5_Jugador2)));
         botonesJugadores.add(new ArrayList<>(List.of(ponerCarta1_Jugador3, ponerCarta2_Jugador3, ponerCarta3_Jugador3, ponerCarta4_Jugador3, ponerCarta5_Jugador3)));
-        botonesJugadores.add(new ArrayList<>(List.of(ponerCarta1_Jugador4, ponerCarta2_Jugador4, ponerCarta3_Jugador4, ponerCarta4_Jugador4, ponerCarta5_Jugador4)));
+        botonesJugadores.add(new ArrayList<>(List.of(ponerCarta1_Jugador4, ponerCarta2_Jugador4, ponerCarta3_Jugador4, ponerCarta4_Jugador4, ponerCarta5_Jugador4)));*/
     }
 
     public void mostrarCartasJugadores(ArrayList<Jugador> jugadores) {
@@ -49,29 +53,16 @@ public class Mesa extends javax.swing.JFrame {
             nombreJugador.setVisible(false);
         }
 
-        // Ocultar los botones de los jugadores que no juegan
-        for (ArrayList<JButton> botones : botonesJugadores) {
-            for (JButton boton : botones) {
-                boton.setVisible(false);
-            }
-        }
-
         for (int i = 0; i < jugadores.size(); i++) {
             Jugador jugador = jugadores.get(i);
             JPanel zonaJugador = panelesZonasJugadores.get(i);
             JLabel nombreJugador = labelsDeJugadores.get(i);
-            ArrayList<JButton> botonesJugador = botonesJugadores.get(i);
 
             zonaJugador.setVisible(true);
             nombreJugador.setVisible(true);
 
-            // Hacer visibles los botones de este jugador
-            for (JButton boton : botonesJugador) {
-                boton.setVisible(true);
-            }
-
             for (int j = 0; j < jugador.getManoSize(); j++) {
-                VistaCarta vistaCarta = new VistaCarta(jugador.getCarta(j),this);
+                VistaCarta vistaCarta = new VistaCarta(jugador.getCarta(j), this);
                 zonaJugador.add(vistaCarta);
             }
             zonaJugador.revalidate();
@@ -79,7 +70,7 @@ public class Mesa extends javax.swing.JFrame {
         }
     }
 
-    public void actualizarTurno(int jugadorActual) {
+    /*public void actualizarTurno(int jugadorActual) {
         // Desactivar todos los botones
         for (ArrayList<JButton> botones : botonesJugadores) {
             for (JButton boton : botones) {
@@ -92,11 +83,28 @@ public class Mesa extends javax.swing.JFrame {
         for (JButton boton : botonesJugadorActual) {
             boton.setEnabled(true);
         }
-    }
-
+    }*/
     public void mostrarGanador(int jugadorGanador) {
         // Mostrar mensaje indicando el ganador
         JOptionPane.showMessageDialog(this, "¡El ganador es: " + labelsDeJugadores.get(jugadorGanador).getText() + "!");
+    }
+
+    public CartaLogica getUltimaCarta() {
+        if (cartasLogicasJugadas.size() > 0) {
+            return cartasLogicasJugadas.get(cartasLogicasJugadas.size() - 1);
+        } else {
+            return null;
+        }
+    }
+
+    public CartaLogica obtenerUltimaCartaSeleccionada(VistaCarta cartaGrafica) {
+        CartaLogica cartaLogica = cartaGrafica.getCarta();
+        ultimasCartasSeleccionadas.add(cartaLogica);
+        if (ultimasCartasSeleccionadas.size() > 0) {
+            return ultimasCartasSeleccionadas.get(ultimasCartasSeleccionadas.size() - 1);
+        } else {
+            return null; // Si no hay cartas seleccionadas, devuelve null
+        }
     }
 
     public void moverCartaAJugadas(VistaCarta vistaCarta) {
@@ -104,9 +112,13 @@ public class Mesa extends javax.swing.JFrame {
         JPanel zonaJugador = (JPanel) vistaCarta.getParent();
         zonaJugador.remove(vistaCarta);
 
+        // Obtener la carta lógica asociada a la VistaCarta
+        CartaLogica cartaLogica = vistaCarta.getCarta();
+        cartasLogicasJugadas.add(cartaLogica);
+
         // Agregar la carta al panel de cartas jugadas
         cartasJugadas.add(vistaCarta);
-        
+
         zonaJugador.revalidate();
         zonaJugador.repaint();
 

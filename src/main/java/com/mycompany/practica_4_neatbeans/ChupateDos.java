@@ -84,15 +84,16 @@ public class ChupateDos {
             
         while(hayGanador==false){
            for (int i = 0; i < jugadores.size(); i++) {
-               mesaGrafica.actualizarTurno(i); // Pasar al siguiente jugador visualmente
+               //mesaGrafica.actualizarTurno(i); // Pasar al siguiente jugador visualmente
                
                if(primeraCarta==true){
                    System.out.println("Carta en mesa: ");
                    System.out.println(mesa.getUltimaCarta());
+                   //System.out.println(mesaGrafica.getUltimaCarta());
                    sc = new Scanner(System.in);
                    System.out.println(jugadores.get(i).getNombre()+ " escoga una carta para colocar ");
                    jugadores.get(i).imprimirMano();
-                   cartaEscogida = sc.nextInt();
+                   cartaEscogida = sc.nextInt();  //Aqui seria el cambio, en vez de que reciba un int en consola, que reciba una carta logica
                    i=verificarCartaJugada(i,cartaEscogida);
                    hayGanador=determinarGanador();
                     if(hayGanador){  
