@@ -70,6 +70,7 @@ public class VistaCarta extends javax.swing.JPanel {
 
     public void cartaSeleccionada(){
         //mesa.moverCartaAJugadas(this);
+        System.out.println("Guardando carta: " + carta);
         mesa.guardarUltimaCartaSeleccionada(this);
     }
     

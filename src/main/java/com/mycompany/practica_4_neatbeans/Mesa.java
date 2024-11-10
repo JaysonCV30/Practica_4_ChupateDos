@@ -89,6 +89,7 @@ public class Mesa extends javax.swing.JFrame {
         ultimasCartasSeleccionadasGraficas.add(cartaGrafica);
         CartaLogica cartaLogica = cartaGrafica.getCarta();
         ultimasCartasSeleccionadasLogicas.add(cartaLogica);
+        System.out.println("Carta logica guardada: " + cartaLogica);
     }
     
     public CartaLogica obtenerUltimaCartaSeleccionadaLogica (){
