@@ -94,7 +94,7 @@ public class ChupateDos {
                    System.out.println(jugadores.get(i).getNombre()+ " escoga una carta para colocar ");
                    jugadores.get(i).imprimirMano();
                    //cartaEscogida = sc.nextInt();  //Aqui seria el cambio, en vez de que reciba un int en consola, que reciba una carta logica
-                   cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionada();
+                   cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
                    i=verificarCartaJugada(i,cartaEscogida);
                    hayGanador=determinarGanador();
                     if(hayGanador){  
@@ -106,32 +106,41 @@ public class ChupateDos {
                    System.out.println("Jugador 1 esocga una carta para colocar");
                    jugadores.get(0).imprimirMano();
                    //cartaEscogida = sc.nextInt();  
-                   if(jugadores.get(0).getCarta(cartaEscogida-1).getValue() == "2"){
+                   /*if(jugadores.get(0).getCarta(cartaEscogida-1).getValue() == "2"){
                        mesa.agregarCartaAMesa(jugadores.get(0).colocarCarta(cartaEscogida-1));
                        jugadores.get(1).agregarCartaAMano(baraja.darCarta());
                        jugadores.get(1).agregarCartaAMano(baraja.darCarta());
                        System.out.println(jugadores.get(1).getNombre()+ " comió " + 2 + " cartas");
                        primeraCarta=true;
+                   }*/
+                   if(cartaEscogida.getValue() == "2"){
+                       mesa.agregarCartaAMesa(cartaEscogida);
+                       mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
+                       jugadores.get(1).agregarCartaAMano(baraja.darCarta());
+                       jugadores.get(1).agregarCartaAMano(baraja.darCarta());
+                       System.out.println(jugadores.get(1).getNombre()+ " comió " + 2 + " cartas");
+                       primeraCarta=true;
                    }
-                   if(jugadores.get(0).getCarta(cartaEscogida-1).getValue() == "3"){
-                       mesa.agregarCartaAMesa(jugadores.get(0).colocarCarta(cartaEscogida-1));
+                   if(cartaEscogida.getValue() == "3"){
+                       mesa.agregarCartaAMesa(cartaEscogida);
+                       mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                        for(int j=0;j<4;j++){
                          jugadores.get(1).agregarCartaAMano(baraja.darCarta());
                        }
                        System.out.println(jugadores.get(1).getNombre()+ " comió " + 4 + " cartas");
                        primeraCarta=true;
                     }
-                   if(jugadores.get(0).getCarta(cartaEscogida-1).getValue() == "Sota"){
-                            System.out.println("Se cambió la dirección de la partida");
-                            mesa.agregarCartaAMesa(jugadores.get(0).colocarCarta(cartaEscogida-1));
-                            Collections.reverse(jugadores);
-                            if(i==0){
+                   if(cartaEscogida.getValue() == "Sota"){
+                        System.out.println("Se cambió la dirección de la partida");
+                        mesa.agregarCartaAMesa(cartaEscogida);
+                        Collections.reverse(jugadores);
+                        if(i==0){
                             i=jugadores.size();
-                            }
-                            if(i==jugadores.size()-1){
-                                i=i-1;
-                            }
-                            primeraCarta=true;
+                        }
+                        if(i==jugadores.size()-1){
+                            i=i-1;
+                        }
+                        primeraCarta=true;
                     }
                     if(jugadores.get(0).getCarta(cartaEscogida-1).getValue() == "As"){
                         mesa.agregarCartaAMesa(jugadores.get(0).colocarCarta(cartaEscogida-1));

@@ -12,7 +12,8 @@ public class Mesa extends javax.swing.JFrame {
     private ArrayList<JPanel> panelesZonasJugadores;
     private ArrayList<JLabel> labelsDeJugadores;
     private ArrayList<CartaLogica> cartasLogicasJugadas;
-    private ArrayList<CartaLogica> ultimasCartasSeleccionadas;
+    private ArrayList<CartaLogica> ultimasCartasSeleccionadasLogicas;
+    private ArrayList<VistaCarta> ultimasCartasSeleccionadasGraficas;
 
     public Mesa() {
         initComponents();
@@ -21,7 +22,8 @@ public class Mesa extends javax.swing.JFrame {
         pack();
 
         cartasLogicasJugadas = new ArrayList<>();
-        ultimasCartasSeleccionadas = new ArrayList<>();
+        ultimasCartasSeleccionadasLogicas = new ArrayList<>();
+        ultimasCartasSeleccionadasGraficas = new ArrayList<>();
 
         // Inicializar paneles para las cartas de los jugadores
         panelesZonasJugadores = new ArrayList<>();
@@ -84,13 +86,22 @@ public class Mesa extends javax.swing.JFrame {
     }
 
     public void guardarUltimaCartaSeleccionada(VistaCarta cartaGrafica) {
+        ultimasCartasSeleccionadasGraficas.add(cartaGrafica);
         CartaLogica cartaLogica = cartaGrafica.getCarta();
-        ultimasCartasSeleccionadas.add(cartaLogica);
+        ultimasCartasSeleccionadasLogicas.add(cartaLogica);
     }
     
-    public CartaLogica obtenerUltimaCartaSeleccionada (){
-        if (ultimasCartasSeleccionadas.size() > 0) {
-            return ultimasCartasSeleccionadas.get(ultimasCartasSeleccionadas.size() - 1);
+    public CartaLogica obtenerUltimaCartaSeleccionadaLogica (){
+        if (ultimasCartasSeleccionadasLogicas.size() > 0) {
+            return ultimasCartasSeleccionadasLogicas.get(ultimasCartasSeleccionadasLogicas.size() - 1);
+        } else {
+            return null; // Si no hay cartas seleccionadas, devuelve null
+        }
+    }
+    
+    public VistaCarta obtenerUltimaCartaSeleccionadaGrafica (){
+        if (ultimasCartasSeleccionadasGraficas.size() > 0) {
+            return ultimasCartasSeleccionadasGraficas.get(ultimasCartasSeleccionadasGraficas.size() - 1);
         } else {
             return null; // Si no hay cartas seleccionadas, devuelve null
         }
