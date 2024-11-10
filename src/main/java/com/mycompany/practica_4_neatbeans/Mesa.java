@@ -91,16 +91,16 @@ public class Mesa extends javax.swing.JFrame {
         ultimasCartasSeleccionadasLogicas.add(cartaLogica);
         System.out.println("Carta logica guardada: " + cartaLogica);
     }
-    
-    public CartaLogica obtenerUltimaCartaSeleccionadaLogica (){
+
+    public CartaLogica obtenerUltimaCartaSeleccionadaLogica() {
         if (ultimasCartasSeleccionadasLogicas.size() > 0) {
             return ultimasCartasSeleccionadasLogicas.get(ultimasCartasSeleccionadasLogicas.size() - 1);
         } else {
             return null; // Si no hay cartas seleccionadas, devuelve null
         }
     }
-    
-    public VistaCarta obtenerUltimaCartaSeleccionadaGrafica (){
+
+    public VistaCarta obtenerUltimaCartaSeleccionadaGrafica() {
         if (ultimasCartasSeleccionadasGraficas.size() > 0) {
             return ultimasCartasSeleccionadasGraficas.get(ultimasCartasSeleccionadasGraficas.size() - 1);
         } else {
@@ -110,8 +110,6 @@ public class Mesa extends javax.swing.JFrame {
 
     public void moverCartaAJugadas(VistaCarta vistaCarta) {
         cartasJugadas.removeAll();
-        JPanel zonaJugador = (JPanel) vistaCarta.getParent();
-        zonaJugador.remove(vistaCarta);
 
         // Obtener la carta lógica asociada a la VistaCarta
         CartaLogica cartaLogica = vistaCarta.getCarta();
@@ -119,9 +117,6 @@ public class Mesa extends javax.swing.JFrame {
 
         // Agregar la carta al panel de cartas jugadas
         cartasJugadas.add(vistaCarta);
-
-        zonaJugador.revalidate();
-        zonaJugador.repaint();
 
         // Actualizar la interfaz para mostrar la carta en el panel de cartas jugadas
         cartasJugadas.revalidate();

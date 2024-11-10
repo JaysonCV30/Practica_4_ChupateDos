@@ -89,7 +89,6 @@ public class ChupateDos {
                     System.out.println("Carta en mesa: ");
                     System.out.println(mesa.getUltimaCarta());
                     //System.out.println(mesaGrafica.getUltimaCarta());
-                    sc = new Scanner(System.in);
                     System.out.println(jugadores.get(i).getNombre() + " escoga una carta para colocar ");
                     jugadores.get(i).imprimirMano();
                     cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
@@ -103,9 +102,9 @@ public class ChupateDos {
                     System.out.println("Jugador 1 esocga una carta para colocar");
                     jugadores.get(0).imprimirMano();
                     cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
-                    if (cartaEscogida == null) {
-                        System.out.println("No se ha seleccionado ninguna carta.");
-                        continue; // Salta al siguiente turno si no hay carta seleccionada
+                    if(cartaEscogida == null){
+                        System.out.println("No se ha seleccionado ninguna carta");
+                        continue;
                     }
 
                     if (cartaEscogida.getValue() == "2") {
@@ -223,7 +222,7 @@ public class ChupateDos {
         }
         baraja.mezclar();
         System.out.println("Las cartas se acabaron, mezclando baraja... ");
-        System.out.println("Ya se mezclÃ³ ");
+        System.out.println("Ya se mezclaron³ ");
     }
 
     public int corregirCartaErronea(int i, CartaLogica cartaEscogida) {
@@ -317,7 +316,7 @@ public class ChupateDos {
                         continuarJuego = true;
                     } else {
                         if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
-                                && cartaEscogida.getValue() == "As") {
+                                && cartaEscogida.getValue() == "1") {
                             mesa.agregarCartaAMesa(cartaEscogida);
                             mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                             jugadores.get(i).colocarCarta(cartaEscogida);
@@ -422,7 +421,7 @@ public class ChupateDos {
 
                 } else {
                     if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
-                            && cartaEscogida.getValue() == "As") {
+                            && cartaEscogida.getValue() == "1") {
                         mesa.agregarCartaAMesa(cartaEscogida);
                         mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                         jugadores.get(i).colocarCarta(cartaEscogida);
@@ -457,7 +456,6 @@ public class ChupateDos {
                                     System.out.println("CHUPATE DOS, Jugador " + (i + 1) + " comió " + contador + " cartas");
 
                                 }
-                                //}
                             }
                         }
                     }
