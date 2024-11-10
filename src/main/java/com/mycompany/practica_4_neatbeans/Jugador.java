@@ -23,7 +23,7 @@ public class Jugador {
     public void agregarCartaAMano(CartaLogica carta) {
         mano.add(carta);
     }
-    
+
     public void agregarCartaGraficaAMano(VistaCarta cartaGrafica) {
         manoGrafica.add(cartaGrafica);
     }
@@ -34,25 +34,35 @@ public class Jugador {
     }
 
     //Metodo para colocar una carta escogida por el jugador
-    public CartaLogica colocarCarta(int indice) {
+    /*public CartaLogica colocarCarta(int indice) {
         if (!estaVaciaMano()) {
             return mano.remove(indice);
         } else {
             return null; // Mano esta vacia
         }
+    }*/
+
+    //Metodo para colocar una carta escogida por el jugador
+    public void colocarCarta(CartaLogica cartaEscogida) {
+        for (int i = 0; i < mano.size(); i++) {
+            CartaLogica carta = mano.get(i);
+            if (cartaEscogida.getValue() == carta.getValue() && cartaEscogida.getSuit() == carta.getSuit()) {
+                mano.remove(i);
+            }
+        }
     }
 
     // Metodo para acceder a una carta cualquiera que se tenga en mano
     public CartaLogica getCarta(int indice) {
-        if (!estaVaciaMano() && indice<mano.size()) {
+        if (!estaVaciaMano() && indice < mano.size()) {
             return mano.get(indice);
         } else {
             return null; // Mano esta vacia
         }
     }
-    
+
     public VistaCarta getCartaGrafica(int indice) {
-        if (!estaVaciaMano() && indice<manoGrafica.size()) {
+        if (!estaVaciaMano() && indice < manoGrafica.size()) {
             return manoGrafica.get(indice);
         } else {
             return null; // Mano esta vacia
@@ -81,7 +91,7 @@ public class Jugador {
     public void imprimirMano() {
         int contador = 0;
         for (CartaLogica carta : mano) {
-            System.out.println("(" + (contador+1) + ")" + ".- " + carta);
+            System.out.println("(" + (contador + 1) + ")" + ".- " + carta);
             contador++;
         }
     }

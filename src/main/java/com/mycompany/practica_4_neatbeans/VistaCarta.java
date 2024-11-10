@@ -30,7 +30,7 @@ public class VistaCarta extends javax.swing.JPanel {
                 //mesa.obtenerUltimaCartaSeleccionada(this);
                 // Verifica si el evento llega aquí
                 System.out.println("Carta clickeada: " + carta);
-                // Cuando se hace clic en la carta, se llama a la función para jugarla
+                // Cuando se hace clic en la carta, se llama a la función para guardarla
                 cartaSeleccionada();
             }
         });
