@@ -93,6 +93,7 @@ public class ChupateDos {
                     //System.out.println(mesaGrafica.getUltimaCarta());
                     System.out.println(jugadores.get(i).getNombre() + " escoga una carta para colocar ");
                     jugadores.get(i).imprimirMano();
+                    mesaGrafica.turnoDelJugador(i);
                     cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
 
                     // Verificar si la carta seleccionada es la misma que la anterior
@@ -112,8 +113,9 @@ public class ChupateDos {
                         break;
                     }
                 } else {
-                    System.out.println("Jugador 1 esocga una carta para colocar");
+                    System.out.println("Jugador 1 escoga una carta para colocar");
                     jugadores.get(0).imprimirMano();
+                    mesaGrafica.turnoDelJugador(i);
                     cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
                     
                     // Verificar si la carta seleccionada es la misma que la anterior
@@ -163,10 +165,10 @@ public class ChupateDos {
                         mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                         jugadores.get(i).colocarCarta(cartaEscogida);
                         System.out.println("Jugador " + 1 + " tira otra vez ");
-                        jugarUnaVuelta(0);
-                        /*if (i == 0) {
+                        //jugarUnaVuelta(0);
+                        if (i == 0) {
                             i--;  // Volver a preguntar a este jugador en el próximo ciclo
-                        }*/
+                        }
                         primeraCarta = true;
                     }
                     if (primeraCarta == false) {
@@ -342,7 +344,10 @@ public class ChupateDos {
                             mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                             jugadores.get(i).colocarCarta(cartaEscogida);
                             System.out.println("Jugador " + (i + 1) + " tira otra vez ");
-                            jugarUnaVuelta(i);
+                            //jugarUnaVuelta(i);
+                            if (i == 0) {
+                                i--;  // Volver a preguntar a este jugador en el próximo ciclo
+                            }
                             continuarJuego = true;
                         } else {
                             if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
@@ -447,7 +452,10 @@ public class ChupateDos {
                         mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                         jugadores.get(i).colocarCarta(cartaEscogida);
                         System.out.println("Jugador " + (i + 1) + " tira otra vez ");
-                        jugarUnaVuelta(i);
+                        //jugarUnaVuelta(i);
+                        if (i == 0) {
+                            i--;  // Volver a preguntar a este jugador en el próximo ciclo
+                        }
                     } else {
                         if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
                                 || cartaEscogida.getValue() == "Rey") {

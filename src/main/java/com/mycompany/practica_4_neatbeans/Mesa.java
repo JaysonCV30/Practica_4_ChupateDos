@@ -1,7 +1,9 @@
 package com.mycompany.practica_4_neatbeans;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,12 +39,6 @@ public class Mesa extends javax.swing.JFrame {
         labelsDeJugadores.add(nombreJugador2);
         labelsDeJugadores.add(nombreJugador3);
         labelsDeJugadores.add(nombreJugador4);
-
-        /*botonesJugadores = new ArrayList<>();
-        botonesJugadores.add(new ArrayList<>(List.of(ponerCarta1_Jugador1, ponerCarta2_Jugador1, ponerCarta3_Jugador1, ponerCarta4_Jugador1, ponerCarta5_Jugador1)));
-        botonesJugadores.add(new ArrayList<>(List.of(ponerCarta1_Jugador2, ponerCarta2_Jugador2, ponerCarta3_Jugador2, ponerCarta4_Jugador2, ponerCarta5_Jugador2)));
-        botonesJugadores.add(new ArrayList<>(List.of(ponerCarta1_Jugador3, ponerCarta2_Jugador3, ponerCarta3_Jugador3, ponerCarta4_Jugador3, ponerCarta5_Jugador3)));
-        botonesJugadores.add(new ArrayList<>(List.of(ponerCarta1_Jugador4, ponerCarta2_Jugador4, ponerCarta3_Jugador4, ponerCarta4_Jugador4, ponerCarta5_Jugador4)));*/
     }
 
     public void mostrarCartasJugadores(ArrayList<Jugador> jugadores) {
@@ -106,6 +102,15 @@ public class Mesa extends javax.swing.JFrame {
         } else {
             return null; // Si no hay cartas seleccionadas, devuelve null
         }
+    }
+
+    public void turnoDelJugador(int jugador) {
+        for (JPanel zonaJugador : panelesZonasJugadores) {
+            zonaJugador.setBorder(null);
+        }
+
+        JPanel zonaJugador = panelesZonasJugadores.get(jugador);
+        zonaJugador.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
     }
 
     public void moverCartaAJugadas(VistaCarta vistaCarta) {
