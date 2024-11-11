@@ -8,10 +8,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-/**
- *
- * @author Jayson
- */
 public class SeleccionJugadoresDialog extends JDialog {
     private int cantidadJugadores;
     private JButton btn2Jugadores;

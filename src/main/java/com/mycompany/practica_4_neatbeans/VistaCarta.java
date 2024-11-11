@@ -9,10 +9,6 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Jayson
- */
 public class VistaCarta extends javax.swing.JPanel {
 
     private CartaLogica carta;
