@@ -355,9 +355,9 @@ public class ChupateDos {
                             jugadores.get(i).colocarCarta(cartaEscogida);
                             System.out.println("Jugador " + (i + 1) + " tira otra vez ");
                             //jugarUnaVuelta(i);
-                            if (i == 0) {
-                                i--;  // Volver a preguntar a este jugador en el próximo ciclo
-                            }
+                            
+                            i--;  // Volver a preguntar a este jugador en el próximo ciclo
+                            
                             continuarJuego = true;
                         } else {
                             if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
@@ -463,9 +463,9 @@ public class ChupateDos {
                         jugadores.get(i).colocarCarta(cartaEscogida);
                         System.out.println("Jugador " + (i + 1) + " tira otra vez ");
                         //jugarUnaVuelta(i);
-                        if (i == 0) {
-                            i--;  // Volver a preguntar a este jugador en el próximo ciclo
-                        }
+                        
+                        i--;  // Volver a preguntar a este jugador en el próximo ciclo
+                        
                     } else {
                         if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
                                 || cartaEscogida.getValue() == "Rey") {
