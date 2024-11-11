@@ -46,6 +46,15 @@ public class Mesa extends javax.swing.JFrame {
             zonaJugador.removeAll();
             zonaJugador.setVisible(false);
         }
+        
+        
+        for (int i = 0; i < jugadores.size(); i++) {
+            Jugador jugador = jugadores.get(i);
+            JLabel nombreJugador = labelsDeJugadores.get(i);
+            
+            nombreJugador.setText(jugador.getNombre());
+        }
+        
 
         for (JLabel nombreJugador : labelsDeJugadores) {
             nombreJugador.setVisible(false);

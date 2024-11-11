@@ -15,7 +15,6 @@ public class ChupateDos {
     private boolean invertido;
 
     //atributos para lo grafico
-    //private VistaBaraja barajaGrafica;
     private Mesa mesaGrafica;
 
     public ChupateDos(int cantidadJugadores) {
@@ -81,7 +80,6 @@ public class ChupateDos {
         CartaLogica cartaEscogida = null;
         CartaLogica cartaAnterior = null;
         boolean primeraCarta = false;
-        //cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
         System.out.println("Carta Escogida: " + cartaEscogida);
 
         while (hayGanador == false) {
@@ -258,7 +256,7 @@ public class ChupateDos {
             System.out.println(mesa.getUltimaCarta());
             System.out.println("Jugador " + (i + 1) + " escoga una carta para colocar ");
             jugadores.get(i).imprimirMano();
-             cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
+            cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
 
                     // Verificar si la carta seleccionada es la misma que la anterior
                     while (cartaEscogida == null || cartaEscogida.equals(cartaAnterior)) {
