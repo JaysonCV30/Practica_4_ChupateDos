@@ -186,14 +186,6 @@ public class ChupateDos {
         return false;
     }
 
-    public void invertirJugadores() {
-        ArrayList<Jugador> nombresInvertidos = new ArrayList<>();
-        for (int i = jugadores.size() - 1; i >= 0; i--) {
-            nombresInvertidos.add(jugadores.get(i));
-        }
-        jugadores = nombresInvertidos;
-    }
-
     public boolean banderaParaManosDeJugadores() {
         for (int i = 0; i < jugadores.size(); i++) {
             if (jugadores.get(i).estaVaciaMano() == true) {
