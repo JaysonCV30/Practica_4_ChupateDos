@@ -78,9 +78,11 @@ public class ChupateDos {
 
     public void iniciarJuego() {
         boolean hayGanador = false;
-        Scanner sc = new Scanner(System.in);
         CartaLogica cartaEscogida = null;
+        CartaLogica cartaAnterior = null;
         boolean primeraCarta = false;
+        //cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
+        System.out.println("Carta Escogida: " + cartaEscogida);
 
         while (hayGanador == false) {
             for (int i = 0; i < jugadores.size(); i++) {
@@ -92,6 +94,17 @@ public class ChupateDos {
                     System.out.println(jugadores.get(i).getNombre() + " escoga una carta para colocar ");
                     jugadores.get(i).imprimirMano();
                     cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
+
+                    // Verificar si la carta seleccionada es la misma que la anterior
+                    while (cartaEscogida == null || cartaEscogida.equals(cartaAnterior)) {
+                        System.out.println("No se puede seleccionar la misma carta. Selecciona una carta diferente.");
+                        cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
+                        System.out.println("Ultima carta seleccionada: " + cartaEscogida);
+                    }
+
+                    // Guardar la carta seleccionada para la próxima ronda
+                    cartaAnterior = cartaEscogida;
+
                     i = verificarCartaJugada(i, cartaEscogida);
                     hayGanador = determinarGanador();
                     if (hayGanador) {
@@ -102,10 +115,15 @@ public class ChupateDos {
                     System.out.println("Jugador 1 esocga una carta para colocar");
                     jugadores.get(0).imprimirMano();
                     cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
-                    if(cartaEscogida == null){
-                        System.out.println("No se ha seleccionado ninguna carta");
-                        continue;
+                    
+                    // Verificar si la carta seleccionada es la misma que la anterior
+                    while (cartaEscogida == null || cartaEscogida.equals(cartaAnterior)) {
+                        System.out.println("No se puede seleccionar la misma carta. Selecciona una carta diferente.");
+                        cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
                     }
+
+                    // Guardar la carta seleccionada para la próxima ronda
+                    cartaAnterior = cartaEscogida;
 
                     if (cartaEscogida.getValue() == "2") {
                         mesa.agregarCartaAMesa(cartaEscogida);
@@ -140,12 +158,15 @@ public class ChupateDos {
                         }
                         primeraCarta = true;
                     }
-                    if (cartaEscogida.getValue() == "As") {
+                    if (cartaEscogida.getValue() == "1") {
                         mesa.agregarCartaAMesa(cartaEscogida);
                         mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                         jugadores.get(i).colocarCarta(cartaEscogida);
                         System.out.println("Jugador " + 1 + " tira otra vez ");
                         jugarUnaVuelta(0);
+                        /*if (i == 0) {
+                            i--;  // Volver a preguntar a este jugador en el próximo ciclo
+                        }*/
                         primeraCarta = true;
                     }
                     if (primeraCarta == false) {
