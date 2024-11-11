@@ -115,7 +115,7 @@ public class ChupateDos {
                     jugadores.get(0).imprimirMano();
                     mesaGrafica.turnoDelJugador(i);
                     cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
-                    
+
                     // Verificar si la carta seleccionada es la misma que la anterior
                     while (cartaEscogida == null || cartaEscogida.equals(cartaAnterior)) {
                         System.out.println("No se puede seleccionar la misma carta. Selecciona una carta diferente.");
@@ -163,7 +163,6 @@ public class ChupateDos {
                         mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                         jugadores.get(i).colocarCarta(cartaEscogida);
                         System.out.println("Jugador " + 1 + " tira otra vez ");
-                        //jugarUnaVuelta(0);
                         if (i == 0) {
                             i--;  // Volver a preguntar a este jugador en el próximo ciclo
                         }
@@ -187,24 +186,6 @@ public class ChupateDos {
             return true;
         }
         return false;
-    }
-
-    public void jugarUnaVuelta(int indice) {
-        for (int i = indice; i < (indice + 1); i++) {
-            System.out.println("Carta en mesa: ");
-            System.out.println(mesa.getUltimaCarta());
-            Scanner sc = new Scanner(System.in);
-            System.out.println(jugadores.get(i).getNombre() + " escoga una carta para colocar ");
-            jugadores.get(i).imprimirMano();
-            //int cartaEscogida = sc.nextInt();
-            CartaLogica cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
-            verificarCartaJugada(i, cartaEscogida);
-            boolean hayGanador = determinarGanador();
-            if (hayGanador) {
-                hayGanador = true;
-                break;
-            }
-        }
     }
 
     public void invertirJugadores() {
@@ -258,15 +239,15 @@ public class ChupateDos {
             jugadores.get(i).imprimirMano();
             cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
 
-                    // Verificar si la carta seleccionada es la misma que la anterior
-                    while (cartaEscogida == null || cartaEscogida.equals(cartaAnterior)) {
-                        System.out.println("No se puede seleccionar la misma carta. Selecciona una carta diferente.");
-                        cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
-                        System.out.println("Ultima carta seleccionada: " + cartaEscogida);
-                    }
+            // Verificar si la carta seleccionada es la misma que la anterior
+            while (cartaEscogida == null || cartaEscogida.equals(cartaAnterior)) {
+                System.out.println("No se puede seleccionar la misma carta. Selecciona una carta diferente.");
+                cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
+                System.out.println("Ultima carta seleccionada: " + cartaEscogida);
+            }
 
-                    // Guardar la carta seleccionada para la próxima ronda
-                    cartaAnterior = cartaEscogida;
+            // Guardar la carta seleccionada para la próxima ronda
+            cartaAnterior = cartaEscogida;
             if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
                     && cartaEscogida.getValue() == "2") {
                 mesa.agregarCartaAMesa(cartaEscogida);
@@ -338,13 +319,11 @@ public class ChupateDos {
                         mesa.agregarCartaAMesa(cartaEscogida);
                         mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                         jugadores.get(i).colocarCarta(cartaEscogida);
-                        System.out.println("Se cambió la dirección de la partida");
-                        Collections.reverse(jugadores);
-                        if (i == 0) {
-                            i = jugadores.size();
-                        }
+                        System.out.println("Se salta turno");
                         if (i == jugadores.size() - 1) {
-                            i = i - 1;
+                            i = 0;
+                        } else {
+                            i++;
                         }
                         continuarJuego = true;
                     } else {
@@ -354,10 +333,9 @@ public class ChupateDos {
                             mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                             jugadores.get(i).colocarCarta(cartaEscogida);
                             System.out.println("Jugador " + (i + 1) + " tira otra vez ");
-                            //jugarUnaVuelta(i);
-                            
+
                             i--;  // Volver a preguntar a este jugador en el próximo ciclo
-                            
+
                             continuarJuego = true;
                         } else {
                             if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
@@ -446,13 +424,11 @@ public class ChupateDos {
                     mesa.agregarCartaAMesa(cartaEscogida);
                     mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                     jugadores.get(i).colocarCarta(cartaEscogida);
-                    System.out.println("Se cambió la dirección de la partida");
-                    Collections.reverse(jugadores);
-                    if (i == 0) {
-                        i = jugadores.size();
-                    }
+                    System.out.println("Se salta turno");
                     if (i == jugadores.size() - 1) {
-                        i = i - 1;
+                        i = 0;
+                    } else {
+                        i++;
                     }
 
                 } else {
@@ -462,10 +438,9 @@ public class ChupateDos {
                         mesaGrafica.moverCartaAJugadas(mesaGrafica.obtenerUltimaCartaSeleccionadaGrafica());
                         jugadores.get(i).colocarCarta(cartaEscogida);
                         System.out.println("Jugador " + (i + 1) + " tira otra vez ");
-                        //jugarUnaVuelta(i);
-                        
+
                         i--;  // Volver a preguntar a este jugador en el próximo ciclo
-                        
+
                     } else {
                         if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
                                 || cartaEscogida.getValue() == "Rey") {
