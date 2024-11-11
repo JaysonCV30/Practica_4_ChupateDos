@@ -251,12 +251,24 @@ public class ChupateDos {
     public int corregirCartaErronea(int i, CartaLogica cartaEscogida) {
         System.out.println("Esa carta no se puede poner ");
         boolean continuarJuego = false;
+        CartaLogica cartaAnterior = cartaEscogida;
+        cartaEscogida = null;
         do {
             System.out.println("Carta en mesa: ");
             System.out.println(mesa.getUltimaCarta());
             System.out.println("Jugador " + (i + 1) + " escoga una carta para colocar ");
             jugadores.get(i).imprimirMano();
-            //cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
+             cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
+
+                    // Verificar si la carta seleccionada es la misma que la anterior
+                    while (cartaEscogida == null || cartaEscogida.equals(cartaAnterior)) {
+                        System.out.println("No se puede seleccionar la misma carta. Selecciona una carta diferente.");
+                        cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
+                        System.out.println("Ultima carta seleccionada: " + cartaEscogida);
+                    }
+
+                    // Guardar la carta seleccionada para la próxima ronda
+                    cartaAnterior = cartaEscogida;
             if (verificarCarta(cartaEscogida, mesa.getUltimaCarta()) == true
                     && cartaEscogida.getValue() == "2") {
                 mesa.agregarCartaAMesa(cartaEscogida);
