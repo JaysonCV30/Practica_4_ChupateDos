@@ -41,24 +41,21 @@ public class Mesa extends javax.swing.JFrame {
         labelsDeJugadores.add(nombreJugador4);
     }
 
-    public void mostrarCartasJugadores(ArrayList<Jugador> jugadores) {
-        for (JPanel zonaJugador : panelesZonasJugadores) {
-            zonaJugador.removeAll();
-            zonaJugador.setVisible(false);
-        }
+        public void mostrarCartasJugadores(ArrayList<Jugador> jugadores) {
+        panelesZonasJugadores.forEach(zona -> {
+        zona.removeAll();
+        zona.setVisible(false);
+        });
         
         
         for (int i = 0; i < jugadores.size(); i++) {
-            Jugador jugador = jugadores.get(i);
-            JLabel nombreJugador = labelsDeJugadores.get(i);
-            
-            nombreJugador.setText(jugador.getNombre());
+          Jugador jugador = jugadores.get(i);
+          JLabel nombreJugador = labelsDeJugadores.get(i);
+          nombreJugador.setText(jugador.getNombre());
         }
         
 
-        for (JLabel nombreJugador : labelsDeJugadores) {
-            nombreJugador.setVisible(false);
-        }
+        labelsDeJugadores.forEach(label -> label.setVisible(false));
 
         for (int i = 0; i < jugadores.size(); i++) {
             Jugador jugador = jugadores.get(i);
@@ -68,10 +65,9 @@ public class Mesa extends javax.swing.JFrame {
             zonaJugador.setVisible(true);
             nombreJugador.setVisible(true);
 
-            for (int j = 0; j < jugador.getManoSize(); j++) {
-                VistaCarta vistaCarta = new VistaCarta(jugador.getCarta(j), this);
-                zonaJugador.add(vistaCarta);
-            }
+            jugador.getMano().forEach(carta -> 
+            zonaJugador.add(new VistaCarta(carta, this))
+             );
             zonaJugador.revalidate();
             zonaJugador.repaint();
         }
