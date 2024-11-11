@@ -96,9 +96,7 @@ public class ChupateDos {
 
                     // Verificar si la carta seleccionada es la misma que la anterior
                     while (cartaEscogida == null || cartaEscogida.equals(cartaAnterior)) {
-                        System.out.println("No se puede seleccionar la misma carta. Selecciona una carta diferente.");
                         cartaEscogida = mesaGrafica.obtenerUltimaCartaSeleccionadaLogica();
-                        System.out.println("Ultima carta seleccionada: " + cartaEscogida);
                     }
 
                     // Guardar la carta seleccionada para la próxima ronda
